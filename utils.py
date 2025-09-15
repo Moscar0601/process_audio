@@ -10,13 +10,17 @@ def process_audio(audio_path, label, sample_rate=16000, segment_seconds=7):
 
     labels = []
     waveform, sr = torchaudio.load(audio_path)
-    # 获取音频波形数据的总样本数
+    
+    # Get the total number of samples in the audio waveform
     total_samples = waveform.shape[1]
-    # 计算音频片段的样本数
+    
+   # Calculate the number of samples per segment
     segment_len = segment_seconds * sample_rate
-    # 音频分割成的片段数量
+    
+    # Calculate the number of segments the audio will be split into
     num_segments = (total_samples + segment_len - 1) // segment_len  
-    # 填充音频数据
+    
+    # Padding
     padded_waveform = torch.zeros((1, num_segments * segment_len))
     padded_waveform[0, :total_samples] = waveform[0]
 
