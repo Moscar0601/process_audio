@@ -9,12 +9,12 @@ class AudioSegmentDataset(Dataset):
         self.items = []
         for item in data_list:
             
-            # audio path
+            # Audio path
             audio_path = item["Session"]
             session_name = os.path.basename(audio_path)
             audio_path += ".wav"
             
-            # label
+            # Label
             match = re.search(r"Ses0*(\d+)", session_name)
             session_num = int(match.group(1))
             label = item["Soft"]
